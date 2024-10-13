@@ -1,0 +1,1 @@
+INSERT INTO "public"."channel" ("id", "created_at", "number", "device_id") VALUES ('1', '2024-10-06 13:25:04.30511+00', '2', '1');
