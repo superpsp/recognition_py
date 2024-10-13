@@ -8,11 +8,15 @@ class Channel:
         self.number = number
         self.device_id = device_id
 
-        data = self.supabase_instance.get_eq_dataset('channel', 'id', 'number', self.number)
-        if 'id' not in data.json():
-            json_row = {'number': self.number, 'device_id': self.device_id}
-            data = self.supabase_instance.insert_row('channel', json_row)
-        self.id = data.data.__getitem__(0)['id']
+        params = {
+            'p_number': self.number
+            , 'p_device_id': self.device_id
+        }
+
+        self.id = self.supabase_instance.get_by_function(
+            'get_or_create_channel'
+            , params
+        ).data
 
     def get_id(self):
         return self.id

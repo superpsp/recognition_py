@@ -7,11 +7,14 @@ class Device:
         self.supabase_instance = SupaBaseCams.get_instance()
         self.ip = ip
 
-        data = self.supabase_instance.get_eq_dataset('device', 'id', 'ip', self.ip)
-        if 'id' not in data.json():
-            json_row = {'ip': self.ip}
-            data = self.supabase_instance.insert_row('device', json_row)
-        self.id = data.data.__getitem__(0)['id']
+        params = {
+            'p_ip': self.ip
+        }
+
+        self.id = self.supabase_instance.get_by_function(
+            'get_or_create_device'
+            , params
+        ).data
 
         self.channels = []
         self.logins = []
