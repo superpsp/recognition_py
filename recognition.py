@@ -52,8 +52,6 @@ with open(file_name, 'r') as rec_file:
                 rec_obj = RecObject(obj, device.get_channel_by_number(channel), container_id, probability)
                 print("RecObject: %s seconds" % (time.time() - start_time))
 
-                print(device.__dict__)
-
             idx += 1
         break
 
