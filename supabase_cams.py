@@ -13,6 +13,17 @@ class SupaBaseCams:
             cls.__instance = SupaBaseCams()
         return SupaBaseCams.__instance
 
+    def get_by_function(self, function, params):
+        data_set = (
+            SupaBaseCams.__supabase
+            .rpc(
+                function
+                , params
+            )
+            .execute()
+        )
+        return data_set
+
     def get_eq_dataset(self, table, columns, eq_column, eq_value):
         data_set = (
             SupaBaseCams.__supabase
